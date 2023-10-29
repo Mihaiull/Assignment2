@@ -81,7 +81,7 @@ def ui():
             elif i==15:
                 print(repo)
             elif i==0:
-                print(Fore.RED+"Bye!")
+                print(Fore.LIGHTGREEN_EX+"Program ended successfully!")
                 print(Style.RESET_ALL)
                 break
             elif i<0 or i>14:
