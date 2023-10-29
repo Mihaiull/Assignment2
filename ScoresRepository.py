@@ -1,5 +1,7 @@
+#colorama for making it fancy
 from colorama import Fore, Style
 
+#The class that has a list of scores and methods to manipulate it
 class ScoresRepository:
     def __init__(self):
         self.scores = []
@@ -69,8 +71,7 @@ class ScoresRepository:
                 minimum = self.scores[i]
         return minimum
     
-    #Get the scores of participants between two indexes
-    #that are multiples of a given value:
+    #Get the scores of participants between two indexes that are multiples of a given value:
     def get_scores_between_indexes_multiples_of(self, index1, index2, multiple):
         scores = []
         for i in range(index1, index2):
@@ -81,15 +82,16 @@ class ScoresRepository:
     #Keep only participants with scores multiple of a value, removing the others:
     def keep_only_scores_multiple_of(self, multiple):
         self.scores_undo.append(self.scores[:])
-        for i in range(len(self.scores)):
-            if self.scores[i] % multiple != 0:
-                self.scores.pop(i)
+        for i in range(len(self.scores)-1, -1, -1):
+            if self.scores[i] % multiple != 0 or self.scores[i] < multiple or self.scores[i] == 0:
+                del self.scores[i]
+
     #Keep only participants with scores higher than a value, removing the other:
     def keep_only_scores_higher_than(self, score):
         self.scores_undo.append(self.scores[:])
-        for i in range(len(self.scores)):
+        for i in range(len(self.scores)-1, -1, -1):
             if self.scores[i] <= score:
-                self.scores.pop(i)
+                del self.scores[i]
     #UNDO:
     def undo(self):
         if len(self.scores_undo) == 0:

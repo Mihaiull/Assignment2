@@ -26,7 +26,7 @@ def display_menu():
 def ui():
     repo = ScoresRepository()
     repo.add_scores([10, 20, 30, 40, 50, 60])
-    #test_all()
+    test_all()
     try:
         while 1>0:
             display_menu()
