@@ -27,8 +27,8 @@ def ui():
     repo = ScoresRepository()
     repo.add_scores([10, 20, 30, 40, 50, 60])
     test_all()
-    try:
-        while 1>0:
+    while 1>0:  
+        try:
             display_menu()
             i = int(input(Fore.LIGHTCYAN_EX+"Give the command: " + Style.RESET_ALL))
             if i==1:
@@ -84,9 +84,9 @@ def ui():
                 print(Fore.LIGHTGREEN_EX+"Program ended successfully!")
                 print(Style.RESET_ALL)
                 break
-            elif i<0 or i>14:
+            elif i<0 or i>15:
                 raise Exception("Invalid command!")
-    except ValueError as e:
-        print(e)
-    except Exception as e:
-        print(e)
+        except ValueError:
+            print("Invalid value!")
+        except Exception as e:
+            print(e)
