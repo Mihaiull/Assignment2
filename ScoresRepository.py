@@ -138,6 +138,21 @@ class ScoresRepository:
                     self.scores.append(self.scores_undo[-1][i])
             except:
                 print("Nothing to undo!")
+    
+    def read_list_from_file(self, filepath):
+        with open(filepath, "r") as f:
+            self.scores = [int(x) for x in f.read().split(",")]
+
+    def write_list_to_file(self, filepath):
+        with open(filepath, "w") as f:
+            f.write(",".join([str(x) for x in self.scores]))
+
+    def write_list_to_file(self):
+        with open("output.txt", "w") as f:
+            f.write(",".join([str(x) for x in self.scores]))
+    def read_list_from_file(self):
+        with open("input.txt", "r") as f:
+            self.scores = [int(x) for x in f.read().split(",")]
 
     #Method to print the list of scores
     #@output: string - the string to be printed

@@ -18,14 +18,16 @@ def display_menu():
     print("11. Get the scores of participants between two indexes that are multiples of a given value")
     print("12. Keep only the scores that are multiples of a given value")
     print("13. Keep only the scores that are higher than a given value")
-    print ("14. Undo")
+    print("14. Undo")
     print("15. Show the list of scores")
+    print("16. Read the list of scores from a file")
+    print("17. Write the list of scores to a file")
     print(Style.RESET_ALL)
 
 #UI
 def ui():
     repo = ScoresRepository()
-    repo.add_scores([10, 20, 30, 40, 50, 60])
+    #repo.add_scores([10, 20, 30, 40, 50, 60])
     test_all()
     while 1>0:  
         try:
@@ -80,11 +82,15 @@ def ui():
                 repo.undo()
             elif i==15:
                 print(repo)
+            elif i==16:
+                repo.read_list_from_file()
+            elif i==17:
+                repo.write_list_to_file()
             elif i==0:
                 print(Fore.LIGHTGREEN_EX+"Program ended successfully!")
                 print(Style.RESET_ALL)
                 break
-            elif i<0 or i>15:
+            elif i<0 or i>17:
                 raise Exception("Invalid command!")
         except ValueError:
             print("Invalid value!")
