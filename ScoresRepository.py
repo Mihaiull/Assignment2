@@ -9,30 +9,30 @@ class ScoresRepository:
 
     # Add a score to the list
     def add_score(self, score):
-        self.scores_undo.append(self.scores[:])
         self.scores.append(score)
-    def add_scores(self, scores):
         self.scores_undo.append(self.scores[:])
+    def add_scores(self, scores):
         for i in range(len(scores)):
             self.scores.append(scores[i])
+        self.scores_undo.append(self.scores[:])
     #Add a score at an index to the list
     def add_score_at_index(self, index, score):
-        self.scores_undo.append(self.scores[:])
         self.scores.insert(index, score)
+        self.scores_undo.append(self.scores[:])
 
     #Remove the score at an index:
     def remove_score_at_index(self, index):
-        self.scores_undo.append(self.scores[:])
         self.scores.pop(index)
+        self.scores_undo.append(self.scores[:])
     #Remove the scores between two indexes:
     def remove_scores_between_indexes(self, index1, index2):
-        self.scores_undo.append(self.scores[:])
         for i in range(index2, index1-1, -1):
             self.scores.pop(i)
+        self.scores_undo.append(self.scores[:])
     #Replace the score at given index:
     def replace_score_at_index(self, index, score):
-        self.scores_undo.append(self.scores[:])
         self.scores[index] = score
+        self.scores_undo.append(self.scores[:])
     
     #Get indexes with scores less than a value:
     def get_indexes_with_scores_less_than(self, score):
@@ -81,17 +81,17 @@ class ScoresRepository:
     
     #Keep only participants with scores multiple of a value, removing the others:
     def keep_only_scores_multiple_of(self, multiple):
-        self.scores_undo.append(self.scores[:])
         for i in range(len(self.scores)-1, -1, -1):
             if self.scores[i] % multiple != 0 or self.scores[i] < multiple or self.scores[i] == 0:
                 del self.scores[i]
+        self.scores_undo.append(self.scores[:])
 
     #Keep only participants with scores higher than a value, removing the other:
     def keep_only_scores_higher_than(self, score):
-        self.scores_undo.append(self.scores[:])
         for i in range(len(self.scores)-1, -1, -1):
             if self.scores[i] <= score:
                 del self.scores[i]
+        self.scores_undo.append(self.scores[:])
     #UNDO:
     def undo(self):
         if len(self.scores_undo) == 0:
@@ -99,7 +99,7 @@ class ScoresRepository:
         else:
             try:
                 self.scores_undo.pop()
-                self.scores = []
+                self.scores.clear()
                 for i in range(len(self.scores_undo[-1])):
                     self.scores.append(self.scores_undo[-1][i])
             except:
