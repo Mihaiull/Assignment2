@@ -139,20 +139,55 @@ class ScoresRepository:
             except:
                 print("Nothing to undo!")
     
+    #Method to read the list of scores from a given custom file
+    #@input filepath - the path to the file
     def read_list_from_file(self, filepath):
-        with open(filepath, "r") as f:
-            self.scores = [int(x) for x in f.read().split(",")]
+        try:
+            with open(filepath, "r") as f:
+                self.scores = [int(x) for x in f.read().split(",")]
+        except ValueError:
+            print("Invalid file!")
+        except FileNotFoundError:
+            print("File not found!")
+        except:
+            print("Something went wrong!")
+        self.scores_undo.append(self.scores[:])
 
+    #Method to write the list of scores to a given custom file
+    #@input filepath - the path to the file
     def write_list_to_file(self, filepath):
-        with open(filepath, "w") as f:
-            f.write(",".join([str(x) for x in self.scores]))
+        try:
+            with open(filepath, "w") as f:
+                f.write(",".join([str(x) for x in self.scores]))
+        except FileNotFoundError:
+            print("File not found!")
+        except:
+            print("Something went wrong!")
 
+    #Method to write the list of scores to the default file
+    #@output output.txt - the default file
     def write_list_to_file(self):
-        with open("output.txt", "w") as f:
-            f.write(",".join([str(x) for x in self.scores]))
+        try:
+            with open("output.txt", "w") as f:
+                f.write(",".join([str(x) for x in self.scores]))
+        except FileNotFoundError:
+            print("File not found!")
+        except:
+            print("Something went wrong!")
+
+    #Method to read the list of scores from the default file
+    #@input input.txt - the default file
     def read_list_from_file(self):
-        with open("input.txt", "r") as f:
-            self.scores = [int(x) for x in f.read().split(",")]
+        try:
+            with open("input.txt", "r") as f:
+                    self.scores = [int(x) for x in f.read().split(",")]
+        except ValueError:
+            print("Invalid file!")
+        except FileNotFoundError:
+            print("File not found!")
+        except:
+            print("Something went wrong!")
+        self.scores_undo.append(self.scores[:])
 
     #Method to print the list of scores
     #@output: string - the string to be printed
